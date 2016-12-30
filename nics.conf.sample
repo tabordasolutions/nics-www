@@ -1,0 +1,44 @@
+<VirtualHost *:80>
+  ServerName nics.coderhythm.io
+
+  RewriteEngine On
+  RedirectMatch 301 ^/(.*) https://www.nics.coderhythm.io:8443/$1
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName www.nics.coderhythm.io
+
+  ErrorLog /dev/stderr
+  LogFormat "%h %l %u %t \"%r\" %>s %b" common
+  CustomLog /dev/stdout common
+
+  ## Rewrite rules
+  RewriteEngine On
+  # Match the root of the web server and redirect to /nics
+  RewriteRule ^/$ https://www.nics.coderhythm.io:8443/nics [L,R=301]
+
+  # Disallow access to the Geoserver web interface
+  <LocationMatch "^/geoserver/web">
+    Require all denied
+  </LocationMatch>
+
+  ## Proxy rules
+  ProxyRequests Off
+  ProxyPass /nics/mediator ws://nicsweb:8080/nics/mediator
+  ProxyPass /em-api http://emapi:8080/em-api
+  ProxyPassReverse /em-api http://emapi:8080/em-api
+  ProxyPass /nics http://nicsweb:8080/nics
+  ProxyPassReverse /nics http://nicsweb:8080/nics
+  ProxyPass /geoserver http://geoserver:8080/geoserver
+  ProxyPassReverse /geoserver http://geoserver:8080/geoserver
+  <Location /openam>
+    ProxyPreserveHost On
+    ProxyPass http://openam:8080/openam
+    ProxyPassReverse http://openam:8080/openam
+  </Location>
+  <LocationMatch "/static">
+    # Allows the browser to cache for 30 days
+    Header set Cache-Control "max-age=2592000, private"
+  </LocationMatch>
+</VirtualHost>
+
