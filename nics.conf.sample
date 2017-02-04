@@ -1,21 +1,21 @@
 <VirtualHost *:80>
-  ServerName nics.coderhythm.io
+  ServerName nicsdev.tabordasolutions.net
 
   RewriteEngine On
-  RedirectMatch 301 ^/(.*) https://www.nics.coderhythm.io:8443/$1
+  RedirectMatch 301 ^/(.*) https://www.nicsdev.tabordasolutions.net:8443/$1
 </VirtualHost>
 
 <VirtualHost *:80>
-  ServerName www.nics.coderhythm.io
+  ServerName www.nicsdev.tabordasolutions.net
 
-  ErrorLog /dev/stderr
   LogFormat "%h %l %u %t \"%r\" %>s %b" common
+  ErrorLog /dev/stdout
   CustomLog /dev/stdout common
 
   ## Rewrite rules
   RewriteEngine On
   # Match the root of the web server and redirect to /nics
-  RewriteRule ^/$ https://www.nics.coderhythm.io:8443/nics [L,R=301]
+  RewriteRule ^/$ https://www.nicsdev.tabordasolutions.net:8443/nics [L,R=301]
 
   # Disallow access to the Geoserver web interface
   <LocationMatch "^/geoserver/web">

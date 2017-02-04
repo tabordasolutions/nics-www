@@ -1,7 +1,7 @@
 # Agent User Response File
 CONFIG_DIR= /etc/apache2
-AM_SERVER_URL= http://openam:8080/openam
-AGENT_URL= http://www.nics.coderhythm.io:8080
+AM_SERVER_URL= http://am.nicsdev.tabordasolutions.net:8080/openam
+AGENT_URL= http://www.nicsdev.tabordasolutions.net:8080
 AGENT_PROFILE_NAME= webagent
 AGENT_PASSWORD_FILE= /root/pass.txt
 
