@@ -32,4 +32,3 @@ ENTRYPOINT /docker-entrypoint.sh
 EXPOSE 80
 EXPOSE 443
 
-VOLUME /var/www/html/static

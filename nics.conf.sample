@@ -7,6 +7,7 @@
 
 <VirtualHost *:80>
   ServerName www.nicsdev.tabordasolutions.net
+  ServerAlias web
 
   LogFormat "%h %l %u %t \"%r\" %>s %b" common
   ErrorLog /dev/stdout
