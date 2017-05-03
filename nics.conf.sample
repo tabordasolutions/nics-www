@@ -2,7 +2,7 @@
   ServerName nicsdev.tabordasolutions.net
 
   RewriteEngine On
-  RedirectMatch 301 ^/(.*) https://www.nicsdev.tabordasolutions.net:3443/$1
+  RedirectMatch 301 ^/(.*) https://www.nicsdev.tabordasolutions.net/$1
 </VirtualHost>
 
 <VirtualHost *:80>
@@ -15,7 +15,7 @@
   ## Rewrite rules
   RewriteEngine On
   # Match the root of the web server and redirect to /nics
-  RewriteRule ^/$ https://www.nicsdev.tabordasolutions.net:3443/nics [L,R=301]
+  RewriteRule ^/$ https://www.nicsdev.tabordasolutions.net/nics [L,R=301]
 
   # Disallow access to the Geoserver web interface
   <LocationMatch "^/geoserver/web">
